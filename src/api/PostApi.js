@@ -9,8 +9,12 @@ const MODULE_NAME = 'post'
 
 export default class Post {
 
-    static async index(data) {
+    static async index(id) {
         return get(MODULE_NAME)
+    }
+
+    static async get(id) {
+        return get(`${MODULE_NAME}/${id}`)
     }
 
     static async store(data) {

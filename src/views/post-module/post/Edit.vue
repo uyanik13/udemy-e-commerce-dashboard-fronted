@@ -1,6 +1,6 @@
 <template>
   <div class="intro-y flex flex-col sm:flex-row items-center mt-8">
-    <h2 class="text-lg font-medium mr-auto">Edit Post</h2>
+    <h2 class="text-lg font-medium mr-auto">Add New Post</h2>
     <div class="w-full sm:w-auto flex mt-4 sm:mt-0">
       <button
         @click="$router.back()"
@@ -27,6 +27,7 @@
         v-model="form.title"
         placeholder="Title"
       />
+      
       <TabGroup class="post intro-y overflow-hidden box mt-5">
         <TabList
           class="post__tabs nav-tabs flex-col sm:flex-row bg-slate-200 dark:bg-darkmode-800"
@@ -62,7 +63,8 @@
                 <ChevronDownIcon class="w-4 h-4 mr-2" /> Text Content
               </div>
               <div class="mt-5">
-                <ClassicEditor v-model="form.content" />
+                <ClassicEditor v-model="form.content"/>
+               
               </div>
             </div>
             <div class="mt-3">
@@ -73,8 +75,9 @@
                 v-model="form.post_category_id"
                 :reduce="(option) => option.id"
                 :multiple="false"
-                :options="categories"
+                :options="postCategories"
               />
+              
             </div>
             <div
               class="border border-slate-200/60 dark:border-darkmode-400 rounded-md p-5 mt-5"
@@ -123,7 +126,7 @@
                     <div
                       class="px-4 pb-4 flex items-center cursor-pointer relative"
                     >
-                      <ImageIcon class="w-4 h-4 mr-2" />
+                      <ImageIcon  @click="$refs.updateImgInput.click()" class="w-4 h-4 mr-2" />
                       <span class="text-primary mr-1">Upload a file</span> or
                       drag and drop
                       <input
@@ -189,7 +192,7 @@
             v-model="form.categories"
             :reduce="(option) => option.id"
             :multiple="true"
-            :options="categories"
+            :options="postCategories"
           />
         </div>
 
@@ -202,7 +205,7 @@
             :reduce="(option) => option.id"
             :multiple="true"
             taggable
-            :options="tags"
+            :options="postTags"
           />
         </div>
         <div class="form-check form-switch flex flex-col items-start mt-3">
@@ -213,31 +216,65 @@
             id="post-form-5"
             class="form-check-input"
             type="checkbox"
-            :checked="form.status"
             v-model="form.status"
           />
         </div>
       </div>
-    
+      <div class="intro-y box p-5 my-3">
+        <div class="mt-3">
+          <label for="post-form-3" class="form-label">Ask Chat GPT</label>
+          <div class="mt-5">
+            <textarea v-model="gptQuestion" cols="30" rows="5" />
+          </div>
+          <div id="response" class="my-2" v-if="gptResponse">
+            <textarea v-model="gptResponse" id="" cols="30" rows="5"></textarea>
+            <select
+              v-model="gptSelectedInput"
+              class="form-select form-select-lg sm:mt-2 sm:mr-2"
+              aria-label=".form-select-lg example"
+            >
+              <option v-for="(index, item) in form" :key="index">
+                {{ item }}
+              </option>
+            </select>
+            <button
+              @click="embedResponse"
+              type="button"
+              class="btn btn-primary text-white mt-2"
+            >
+              Embed
+            </button>
+          </div>
+        </div>
+        <div class="flex justify-end">
+          <button
+            @click="askGPT"
+            type="button"
+            class="btn btn-success text-white mt-2"
+          >
+            <SlackIcon class="w-4 h-4 mr-2" /> Ask
+          </button>
+        </div>
+      </div>
     </div>
     <!-- END: Post Info -->
   </div>
 </template>
 
 <script setup>
-import { ref, onBeforeMount } from "vue";
-import Post from "@/api/post";
-import Category from "@/api/category";
-import Tag from "@/api/tag";
+import { toRefs, ref, onBeforeMount } from "vue";
 import vSelect from "vue-select";
 import "vue-select/dist/vue-select.css";
-import router from "@/router";
-import { useRoute } from 'vue-router'
-import { helper } from "@/utils/helper";
+import router from '@/router';
+import PostAPI from '@/api/PostApi'
+import PostCategoryAPI from '@/api/PostCategoryApi'
+import PostTagAPI from '@/api/PostTagApi'
+import {useRoute} from 'vue-router'
 const route = useRoute()
 
 const categories = ref([]);
 const tags = ref([]);
+const gptAuthToken = import.meta.env.VITE_GPT_AUTH_TOKEN;
 const form = ref({
   title: "",
   content: "",
@@ -252,18 +289,42 @@ const form = ref({
   focus_keyword: "",
 });
 
-const save = async () => {
-};
+const gptQuestion = ref("");
+const gptResponse = ref(null);
+const gptSelectedInput = ref(null);
 
+const postCategories = ref([])
+const postTags = ref([])
 
-const uploadImage = (input) => {
- 
-};
-const removeImage = (input) => {
-  form.value.thumbnail = null;
-};
+const save = () => {
+  PostAPI.update(form.value, form.value.id).then(res => {
+    form.value = res
+  })
+}
 
 onBeforeMount(async () => {
- 
+  getCategories();
+  getTags();
+  getPost()
 });
+
+const getCategories = () => {
+  PostCategoryAPI.index().then(res=>{
+    postCategories.value = res.data
+  })
+ 
+};
+const getTags = () => {
+  PostTagAPI.index().then(res=>{
+    postTags.value = res.data
+  })
+};
+
+const getPost = ()=>{
+  let id = route.params.id
+  PostAPI.get(id).then(res=>{
+    form.value = res
+  })
+}
+
 </script>

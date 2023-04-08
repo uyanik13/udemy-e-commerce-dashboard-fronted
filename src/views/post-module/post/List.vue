@@ -80,10 +80,10 @@
             <td class="text-center">{{ item.status }}</td>
             <td class="table-report__action w-56">
               <div class="flex justify-center items-center">
-                <a class="flex items-center mr-3" href="javascript:;">
+                <a @click="edit(item.id)" class="flex items-center mr-3" href="javascript:;">
                   <CheckSquareIcon class="w-4 h-4 mr-1" /> Edit
                 </a>
-                <a class="flex items-center text-danger" href="javascript:;">
+                <a  @click="_delete(item.id)" class="flex items-center text-danger" href="javascript:;">
                   <Trash2Icon class="w-4 h-4 mr-1" /> Delete
                 </a>
               </div>
@@ -103,12 +103,20 @@
 import { ref, onBeforeMount } from "vue";
 import PaginationComponent from "@/components/table/Pagination.vue";
 import PostAPI from '@/api/PostApi'
-
+import router from '@/router'
 const items = ref([]);
 
 onBeforeMount(async () => {
   getItems();
 });
+
+const edit = (id) => {
+  router.push({name:'post-edit', params:{id:id}})
+}
+
+const _delete = (id) => {
+  PostAPI.delete(id).then(res => {console.log(res)})
+}
 
 const getItems = () => {
   PostAPI.index().then(res=>{

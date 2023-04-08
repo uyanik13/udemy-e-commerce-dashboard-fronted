@@ -16,7 +16,7 @@ export const post = (url, request, headers = {}) => {
 
 export const patch = (url, request, headers = {}) => {
   return axios
-    .post(url, request, { headers })
+    .patch(url, request, { headers })
     .then((response) => Promise.resolve(response.data))
     .catch((error) => Promise.reject(error));
 };
