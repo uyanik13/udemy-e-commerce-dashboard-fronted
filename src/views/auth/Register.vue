@@ -135,6 +135,8 @@
 import { ref, onMounted } from "vue";
 import DarkModeSwitcher from "@/components/dark-mode-switcher/Main.vue";
 import dom from "@left4code/tw-starter/dist/js/dom";
+import {useAuthStore} from '@/stores/auth.store'
+const authStore = useAuthStore()
 
 const form = ref({
   first_name: "Ogur",
@@ -144,6 +146,10 @@ const form = ref({
   password_confirmation: "123456",
   isTermsConditionAccepted: true,
 });
+
+const register = () => {
+  authStore.register(form.value)
+}
 
 
 onMounted(() => {
