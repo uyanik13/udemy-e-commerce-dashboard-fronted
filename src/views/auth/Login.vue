@@ -116,14 +116,18 @@
 import { ref, onMounted } from "vue";
 import DarkModeSwitcher from "@/components/dark-mode-switcher/Main.vue";
 import dom from "@left4code/tw-starter/dist/js/dom";
-
+import {useAuthStore} from '@/stores/auth.store'
+const authStore = useAuthStore()
 
 const form = ref({
-      email: 'ogur.uyanik@gmail.com',
-      password: '123456',
-      remember_me: false
+  email : 'ogur.uyanik@gmail.com',
+  password : 123456,
+  remember_me : null,
 })
 
+const login = ()=> {
+   authStore.login(form.value)
+}
 
 onMounted(() => {
   dom("body").removeClass("main").removeClass("error-page").addClass("login");

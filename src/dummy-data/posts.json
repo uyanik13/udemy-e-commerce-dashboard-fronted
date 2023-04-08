@@ -1,0 +1,312 @@
+{
+    "current_page": 1,
+    "data": [
+        {
+            "id": 50,
+            "user_id": 10,
+            "post_category_id": 24,
+            "title": "inventore",
+            "content": "Sint consequatur accusantium eos porro earum velit enim.",
+            "slug": "aliquam",
+            "seo_title": "Aut velit distinctio exercitationem veniam est.",
+            "seo_description": "Nemo dignissimos consequatur aut inventore quasi et.",
+            "focus_keyword": "quod",
+            "status": 0,
+            "thumbnail": "/var/folders/1c/dprssnps2wj_37ddgbr6y1rc0000gn/T/6422db4060485d924c19f7fe54154782.png",
+            "thumbnail_alt_text": null,
+            "created_at": "2023-04-05T21:41:15.000000Z",
+            "updated_at": "2023-04-05T21:41:15.000000Z",
+            "category": {
+                "id": 24,
+                "title": "molestias",
+                "slug": "facere",
+                "seo_title": "Maxime recusandae necessitatibus eos fugit illum voluptatum consequatur.",
+                "seo_description": "Optio nemo ut nihil optio.",
+                "parent_id": null,
+                "created_at": "2023-04-05T21:40:43.000000Z",
+                "updated_at": "2023-04-05T21:40:43.000000Z"
+            }
+        },
+        {
+            "id": 49,
+            "user_id": 1,
+            "post_category_id": 25,
+            "title": "eum",
+            "content": "Accusamus cupiditate molestiae possimus.",
+            "slug": "nostrum",
+            "seo_title": "Officia voluptate et eaque et et.",
+            "seo_description": "Libero esse tempore cumque sunt soluta quisquam.",
+            "focus_keyword": "rerum",
+            "status": 1,
+            "thumbnail": "/var/folders/1c/dprssnps2wj_37ddgbr6y1rc0000gn/T/b8307982725a817d92da0b3233a8e564.png",
+            "thumbnail_alt_text": null,
+            "created_at": "2023-04-05T21:41:15.000000Z",
+            "updated_at": "2023-04-05T21:41:15.000000Z",
+            "category": {
+                "id": 25,
+                "title": "consequatur",
+                "slug": "error",
+                "seo_title": "Ut in ut quisquam.",
+                "seo_description": "Dolor ipsam fugiat cupiditate deleniti.",
+                "parent_id": null,
+                "created_at": "2023-04-05T21:40:43.000000Z",
+                "updated_at": "2023-04-05T21:40:43.000000Z"
+            }
+        },
+        {
+            "id": 48,
+            "user_id": 11,
+            "post_category_id": 5,
+            "title": "qui",
+            "content": "Enim itaque quisquam et voluptas.",
+            "slug": "et-4",
+            "seo_title": "Molestias cum fuga adipisci ut consectetur id sed.",
+            "seo_description": "Totam suscipit non nulla nisi.",
+            "focus_keyword": "adipisci",
+            "status": 1,
+            "thumbnail": "/var/folders/1c/dprssnps2wj_37ddgbr6y1rc0000gn/T/73731fee0aaee66c0f1c27662cc5ccb2.png",
+            "thumbnail_alt_text": null,
+            "created_at": "2023-04-05T21:41:15.000000Z",
+            "updated_at": "2023-04-05T21:41:15.000000Z",
+            "category": {
+                "id": 5,
+                "title": "fuga",
+                "slug": "voluptatem",
+                "seo_title": "Laboriosam ut est et ut.",
+                "seo_description": "Voluptate molestias dolorem fugiat maiores.",
+                "parent_id": null,
+                "created_at": "2023-04-05T21:40:42.000000Z",
+                "updated_at": "2023-04-05T21:40:42.000000Z"
+            }
+        },
+        {
+            "id": 47,
+            "user_id": 9,
+            "post_category_id": 18,
+            "title": "quo",
+            "content": "Voluptas deserunt fugiat voluptas consequatur.",
+            "slug": "nihil-1",
+            "seo_title": "Facere non amet hic quos libero.",
+            "seo_description": "Reprehenderit non tempore et porro autem.",
+            "focus_keyword": "repudiandae",
+            "status": 1,
+            "thumbnail": "/var/folders/1c/dprssnps2wj_37ddgbr6y1rc0000gn/T/927dec2aaf626cef713413cd0c2a2875.png",
+            "thumbnail_alt_text": null,
+            "created_at": "2023-04-05T21:41:15.000000Z",
+            "updated_at": "2023-04-05T21:41:15.000000Z",
+            "category": {
+                "id": 18,
+                "title": "libero",
+                "slug": "sint-1",
+                "seo_title": "Autem et ipsa maxime tenetur.",
+                "seo_description": "Quae dolores sint voluptatem similique beatae eos.",
+                "parent_id": null,
+                "created_at": "2023-04-05T21:40:43.000000Z",
+                "updated_at": "2023-04-05T21:40:43.000000Z"
+            }
+        },
+        {
+            "id": 46,
+            "user_id": 22,
+            "post_category_id": 3,
+            "title": "molestias",
+            "content": "Commodi necessitatibus est officia architecto aliquam eum doloremque esse.",
+            "slug": "praesentium",
+            "seo_title": "Esse corrupti velit provident reiciendis voluptatem.",
+            "seo_description": "Mollitia dolor praesentium sequi vero laboriosam quia.",
+            "focus_keyword": "id",
+            "status": 0,
+            "thumbnail": "/var/folders/1c/dprssnps2wj_37ddgbr6y1rc0000gn/T/3c9c1be6b7e384fe3149719726be4001.png",
+            "thumbnail_alt_text": null,
+            "created_at": "2023-04-05T21:41:15.000000Z",
+            "updated_at": "2023-04-05T21:41:15.000000Z",
+            "category": {
+                "id": 3,
+                "title": "facere",
+                "slug": "labore",
+                "seo_title": "Occaecati sed placeat eos aperiam explicabo eveniet sed.",
+                "seo_description": "Ut natus ut numquam.",
+                "parent_id": null,
+                "created_at": "2023-04-05T21:40:42.000000Z",
+                "updated_at": "2023-04-05T21:40:42.000000Z"
+            }
+        },
+        {
+            "id": 45,
+            "user_id": 7,
+            "post_category_id": 13,
+            "title": "alias",
+            "content": "Deserunt omnis officiis iure quaerat recusandae et ducimus.",
+            "slug": "ut-1",
+            "seo_title": "Sit consectetur eos enim inventore animi et illum.",
+            "seo_description": "Vitae dolor molestias qui aut sed aut sunt voluptas.",
+            "focus_keyword": "aliquid",
+            "status": 0,
+            "thumbnail": "/var/folders/1c/dprssnps2wj_37ddgbr6y1rc0000gn/T/3e500cd857fcd92348fb41ad6cc8ed6d.png",
+            "thumbnail_alt_text": null,
+            "created_at": "2023-04-05T21:41:15.000000Z",
+            "updated_at": "2023-04-05T21:41:15.000000Z",
+            "category": {
+                "id": 13,
+                "title": "accusantium",
+                "slug": "quia",
+                "seo_title": "Perferendis dolorem facere voluptate qui aliquam sit vitae.",
+                "seo_description": "Deserunt qui praesentium architecto et neque nulla eos.",
+                "parent_id": null,
+                "created_at": "2023-04-05T21:40:43.000000Z",
+                "updated_at": "2023-04-05T21:40:43.000000Z"
+            }
+        },
+        {
+            "id": 44,
+            "user_id": 7,
+            "post_category_id": 5,
+            "title": "consequuntur",
+            "content": "Est eveniet mollitia ut incidunt.",
+            "slug": "voluptates",
+            "seo_title": "Quaerat aut ut deserunt.",
+            "seo_description": "Repellendus est consequatur beatae officia atque ea.",
+            "focus_keyword": "incidunt",
+            "status": 1,
+            "thumbnail": "/var/folders/1c/dprssnps2wj_37ddgbr6y1rc0000gn/T/03d2ed083ac11d6d24169cd34d315277.png",
+            "thumbnail_alt_text": null,
+            "created_at": "2023-04-05T21:41:15.000000Z",
+            "updated_at": "2023-04-05T21:41:15.000000Z",
+            "category": {
+                "id": 5,
+                "title": "fuga",
+                "slug": "voluptatem",
+                "seo_title": "Laboriosam ut est et ut.",
+                "seo_description": "Voluptate molestias dolorem fugiat maiores.",
+                "parent_id": null,
+                "created_at": "2023-04-05T21:40:42.000000Z",
+                "updated_at": "2023-04-05T21:40:42.000000Z"
+            }
+        },
+        {
+            "id": 43,
+            "user_id": 11,
+            "post_category_id": 3,
+            "title": "dolorum",
+            "content": "Sunt beatae expedita odit neque id odio blanditiis.",
+            "slug": "quibusdam",
+            "seo_title": "Blanditiis eligendi ad quo unde corrupti aperiam quam.",
+            "seo_description": "Vero sed ipsa ut animi inventore.",
+            "focus_keyword": "accusantium",
+            "status": 1,
+            "thumbnail": "/var/folders/1c/dprssnps2wj_37ddgbr6y1rc0000gn/T/c1b75ccc9caaaaed6bcbab35606cd51a.png",
+            "thumbnail_alt_text": null,
+            "created_at": "2023-04-05T21:41:15.000000Z",
+            "updated_at": "2023-04-05T21:41:15.000000Z",
+            "category": {
+                "id": 3,
+                "title": "facere",
+                "slug": "labore",
+                "seo_title": "Occaecati sed placeat eos aperiam explicabo eveniet sed.",
+                "seo_description": "Ut natus ut numquam.",
+                "parent_id": null,
+                "created_at": "2023-04-05T21:40:42.000000Z",
+                "updated_at": "2023-04-05T21:40:42.000000Z"
+            }
+        },
+        {
+            "id": 42,
+            "user_id": 22,
+            "post_category_id": 22,
+            "title": "aut",
+            "content": "Omnis dolores magni non placeat aut modi adipisci.",
+            "slug": "sint",
+            "seo_title": "Qui dolores soluta neque quo et.",
+            "seo_description": "Magni quia ea et dolor aliquid quo.",
+            "focus_keyword": "id",
+            "status": 0,
+            "thumbnail": "/var/folders/1c/dprssnps2wj_37ddgbr6y1rc0000gn/T/b16df746b5c19e3ef1a974aed09efe50.png",
+            "thumbnail_alt_text": null,
+            "created_at": "2023-04-05T21:41:15.000000Z",
+            "updated_at": "2023-04-05T21:41:15.000000Z",
+            "category": {
+                "id": 22,
+                "title": "eveniet",
+                "slug": "aut-1",
+                "seo_title": "Ut unde accusantium rerum iusto recusandae aperiam excepturi.",
+                "seo_description": "Ut at ipsum perferendis maxime veritatis in.",
+                "parent_id": null,
+                "created_at": "2023-04-05T21:40:43.000000Z",
+                "updated_at": "2023-04-05T21:40:43.000000Z"
+            }
+        },
+        {
+            "id": 41,
+            "user_id": 5,
+            "post_category_id": 20,
+            "title": "cumque",
+            "content": "Soluta corrupti blanditiis qui voluptatum possimus nulla et.",
+            "slug": "illum",
+            "seo_title": "Rerum quis maiores vel quasi nesciunt quas.",
+            "seo_description": "Veniam aut eveniet et cum quia neque quis.",
+            "focus_keyword": "voluptatem",
+            "status": 1,
+            "thumbnail": "/var/folders/1c/dprssnps2wj_37ddgbr6y1rc0000gn/T/207a0d31d286f87d5129d564a9e2ba52.png",
+            "thumbnail_alt_text": null,
+            "created_at": "2023-04-05T21:41:15.000000Z",
+            "updated_at": "2023-04-05T21:41:15.000000Z",
+            "category": {
+                "id": 20,
+                "title": "alias",
+                "slug": "impedit",
+                "seo_title": "Impedit similique laborum aut impedit iste et.",
+                "seo_description": "Laborum aperiam molestiae odio non aut alias est.",
+                "parent_id": null,
+                "created_at": "2023-04-05T21:40:43.000000Z",
+                "updated_at": "2023-04-05T21:40:43.000000Z"
+            }
+        }
+    ],
+    "first_page_url": "http://127.0.0.1:8000/api/auth/post?page=1",
+    "from": 1,
+    "last_page": 5,
+    "last_page_url": "http://127.0.0.1:8000/api/auth/post?page=5",
+    "links": [
+        {
+            "url": null,
+            "label": "&laquo; Previous",
+            "active": false
+        },
+        {
+            "url": "http://127.0.0.1:8000/api/auth/post?page=1",
+            "label": "1",
+            "active": true
+        },
+        {
+            "url": "http://127.0.0.1:8000/api/auth/post?page=2",
+            "label": "2",
+            "active": false
+        },
+        {
+            "url": "http://127.0.0.1:8000/api/auth/post?page=3",
+            "label": "3",
+            "active": false
+        },
+        {
+            "url": "http://127.0.0.1:8000/api/auth/post?page=4",
+            "label": "4",
+            "active": false
+        },
+        {
+            "url": "http://127.0.0.1:8000/api/auth/post?page=5",
+            "label": "5",
+            "active": false
+        },
+        {
+            "url": "http://127.0.0.1:8000/api/auth/post?page=2",
+            "label": "Next &raquo;",
+            "active": false
+        }
+    ],
+    "next_page_url": "http://127.0.0.1:8000/api/auth/post?page=2",
+    "path": "http://127.0.0.1:8000/api/auth/post",
+    "per_page": 10,
+    "prev_page_url": null,
+    "to": 10,
+    "total": 50
+}

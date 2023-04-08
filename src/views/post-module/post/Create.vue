@@ -27,7 +27,7 @@
         v-model="form.title"
         placeholder="Title"
       />
-      
+
       <TabGroup class="post intro-y overflow-hidden box mt-5">
         <TabList
           class="post__tabs nav-tabs flex-col sm:flex-row bg-slate-200 dark:bg-darkmode-800"
@@ -63,8 +63,7 @@
                 <ChevronDownIcon class="w-4 h-4 mr-2" /> Text Content
               </div>
               <div class="mt-5">
-                <ClassicEditor v-model="form.content"/>
-               
+                <ClassicEditor v-model="form.content" />
               </div>
             </div>
             <div class="mt-3">
@@ -75,9 +74,8 @@
                 v-model="form.post_category_id"
                 :reduce="(option) => option.id"
                 :multiple="false"
-                :options="categories"
+                :options="postCategories"
               />
-              
             </div>
             <div
               class="border border-slate-200/60 dark:border-darkmode-400 rounded-md p-5 mt-5"
@@ -111,7 +109,7 @@
                         <img
                           class="rounded-md"
                           data-action="zoom"
-                          :src="form.thumbnail"
+                          :src="tempImage ?? form.thumbnail"
                         />
                         <Tippy
                           tag="div"
@@ -126,7 +124,10 @@
                     <div
                       class="px-4 pb-4 flex items-center cursor-pointer relative"
                     >
-                      <ImageIcon  @click="$refs.updateImgInput.click()" class="w-4 h-4 mr-2" />
+                      <ImageIcon
+                        @click="$refs.updateImgInput.click()"
+                        class="w-4 h-4 mr-2"
+                      />
                       <span class="text-primary mr-1">Upload a file</span> or
                       drag and drop
                       <input
@@ -192,7 +193,7 @@
             v-model="form.categories"
             :reduce="(option) => option.id"
             :multiple="true"
-            :options="categories"
+            :options="postCategories"
           />
         </div>
 
@@ -205,7 +206,7 @@
             :reduce="(option) => option.id"
             :multiple="true"
             taggable
-            :options="tags"
+            :options="postTags"
           />
         </div>
         <div class="form-check form-switch flex flex-col items-start mt-3">
@@ -217,6 +218,8 @@
             class="form-check-input"
             type="checkbox"
             v-model="form.status"
+            true-value="1"
+            false-value="0"
           />
         </div>
       </div>
@@ -265,8 +268,10 @@
 import { toRefs, ref, onBeforeMount } from "vue";
 import vSelect from "vue-select";
 import "vue-select/dist/vue-select.css";
-import router from '@/router';
-
+import router from "@/router";
+import PostAPI from "@/api/PostApi";
+import PostCategoryAPI from "@/api/PostCategoryApi";
+import PostTagAPI from "@/api/PostTagApi";
 
 const categories = ref([]);
 const tags = ref([]);
@@ -274,7 +279,7 @@ const gptAuthToken = import.meta.env.VITE_GPT_AUTH_TOKEN;
 const form = ref({
   title: "",
   content: "",
-  status: true,
+  status: 1,
   thumbnail: null,
   thumbnail_alt_text: null,
   tags: [],
@@ -285,8 +290,78 @@ const form = ref({
   focus_keyword: "",
 });
 
+const tempImage = ref(null)
+
 const gptQuestion = ref("");
 const gptResponse = ref(null);
 const gptSelectedInput = ref(null);
+
+const postCategories = ref([]);
+const postTags = ref([]);
+
+const save = () => {
+
+  const formData = transformData();
+  PostAPI.store(formData).then((res) => {
+    console.log(res);
+  });
+};
+
+const appendToFormData = (formData, key, value) => {
+  if (value instanceof File) {
+    formData.append(key, value, value.name);
+  } else if (Array.isArray(value)) {
+    value.forEach((item) => {
+      appendToFormData(formData, `${key}[]`, item);
+    });
+  } else if (typeof value === 'object' && value !== null) {
+    Object.entries(value).forEach(([subKey, subValue]) => {
+      appendToFormData(formData, `${key}[${subKey}]`, subValue);
+    });
+  } else {
+    formData.append(key, value);
+  }
+};
+
+const transformData = () => {
+  const formData = new FormData();
+  Object.entries(form.value).forEach(([key, value]) => {
+    appendToFormData(formData, key, value);
+  });
+
+  return formData;
+};
+
+onBeforeMount(async () => {
+  getCategories();
+  getTags();
+});
+
+const getCategories = () => {
+  PostCategoryAPI.index().then((res) => {
+    postCategories.value = res.data;
+  });
+};
+const getTags = () => {
+  PostTagAPI.index().then((res) => {
+    postTags.value = res.data;
+  });
+};
+
+const removeImage = () => {
+  form.value.thumbnail = null;
+};
+
+const uploadImage = (input) => {
+  if(input.target.files && input.target.files[0]){
+    const reader = new FileReader()
+    reader.onload = (e)=>{
+      tempImage.value = e.target.result
+      form.value.thumbnail = input.target.files[0]
+    }
+    reader.readAsDataURL(input.target.files[0])
+  }
+};
+
 
 </script>

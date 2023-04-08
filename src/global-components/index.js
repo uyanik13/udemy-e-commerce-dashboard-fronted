@@ -10,8 +10,6 @@ import ClassicEditor from "./ckeditor/ClassicEditor.vue";
 // import DocumentEditor from './ckeditor/DocumentEditor.vue'
 // import InlineEditor from './ckeditor/InlineEditor.vue'
 import Dropzone from "./dropzone/Main.vue";
-import FullCalendar from "./calendar/Main.vue";
-import FullCalendarDraggable from "./calendar/Draggable.vue";
 import { Modal, ModalHeader, ModalBody, ModalFooter } from "./modal";
 import {
   Dropdown,
@@ -51,8 +49,6 @@ export default (app) => {
   // app.component('BalloonEditor', BalloonEditor)
   // app.component('DocumentEditor', DocumentEditor)
   // app.component('InlineEditor', InlineEditor)
-  app.component("FullCalendar", FullCalendar);
-  app.component("FullCalendarDraggable", FullCalendarDraggable);
   app.component("Modal", Modal);
   app.component("ModalHeader", ModalHeader);
   app.component("ModalBody", ModalBody)
