@@ -80,16 +80,10 @@
             <td class="text-center">{{ item.status }}</td>
             <td class="table-report__action w-56">
               <div class="flex justify-center items-center">
-                <a
-                  class="flex items-center mr-3"
-                  href="javascript:;"
-                >
+                <a class="flex items-center mr-3" href="javascript:;">
                   <CheckSquareIcon class="w-4 h-4 mr-1" /> Edit
                 </a>
-                <a
-                  class="flex items-center text-danger"
-                  href="javascript:;"
-                >
+                <a class="flex items-center text-danger" href="javascript:;">
                   <Trash2Icon class="w-4 h-4 mr-1" /> Delete
                 </a>
               </div>
@@ -103,14 +97,23 @@
       @update:pagination="updatePagination"
     />
   </div>
-
 </template>
 
 <script setup>
-import { ref } from "vue";
+import { ref, onBeforeMount } from "vue";
 import PaginationComponent from "@/components/table/Pagination.vue";
-import posts from '@/dummy-data/posts.json'
+import PostAPI from '@/api/PostApi'
 
-const items = ref(posts);
+const items = ref([]);
 
+onBeforeMount(async () => {
+  getItems();
+});
+
+const getItems = () => {
+  PostAPI.index().then(res=>{
+    items.value = res.data
+  })
+ 
+};
 </script>

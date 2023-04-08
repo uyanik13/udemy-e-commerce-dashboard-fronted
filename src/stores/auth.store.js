@@ -3,6 +3,7 @@ import {
 } from 'pinia'
 import axios from '@/plugins/axios'
 import router from '@/router'
+import AuthAPI from '@/api/AuthApi'
 
 
 export const useAuthStore = defineStore({
@@ -19,26 +20,32 @@ export const useAuthStore = defineStore({
     },
     actions: {
         async login(data) {
-            axios.post('login', data).then(res => {
-               this.setUserData(res)
+            try {
+                const response = await AuthAPI.login(data);
+                this.setUserData(response)
                 return router.push({
                     name: 'dashboard'
                 })
-            })
+            } catch (error) {
+                console.log(error)
+            }
         },
         async register(data) {
-            axios.post('register', data).then(res => {
-               this.setUserData(res)
+            try {
+                const response = await AuthAPI.register(data);
+                this.setUserData(response)
                 return router.push({
                     name: 'dashboard'
                 })
-            })
+            } catch (error) {
+                console.log(error)
+            }
         },
         setUserData(res) {
-            this.user = res.data.user
+            this.user = res.user
             localStorage.setItem('user', JSON.stringify(this.user))
-            if (res.data.token) {
-                this.token = res.data.token
+            if (res.token) {
+                this.token = res.token
                 localStorage.setItem('token', this.token)
             }
 
