@@ -367,7 +367,7 @@ for (let i = 0; i < 20; i++) {
     files: fakers.fakeFiles(),
     jobs: fakers.fakeJobs(),
     notificationCount: fakers.fakeNotificationCount(),
-    foods: fakers.fakeFoods(),
+    foods: fakers.fakeFoods()
   };
 }
 

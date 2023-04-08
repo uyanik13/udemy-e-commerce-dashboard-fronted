@@ -81,7 +81,6 @@
             <td class="table-report__action w-56">
               <div class="flex justify-center items-center">
                 <a
-                  @click="edit(item.id)"
                   class="flex items-center mr-3"
                   href="javascript:;"
                 >
@@ -90,7 +89,6 @@
                 <a
                   class="flex items-center text-danger"
                   href="javascript:;"
-                  @click="deleteFunc(item.id)"
                 >
                   <Trash2Icon class="w-4 h-4 mr-1" /> Delete
                 </a>
@@ -105,53 +103,14 @@
       @update:pagination="updatePagination"
     />
   </div>
-  <!-- BEGIN: Delete Confirmation Modal -->
-  <Modal
-    :show="deleteConfirmationModal"
-    @hidden="deleteConfirmationModal = false"
-  >
-    <ModalBody class="p-0">
-      <div class="p-5 text-center">
-        <XCircleIcon class="w-16 h-16 text-danger mx-auto mt-3" />
-        <div class="text-3xl mt-5">Are you sure?</div>
-        <div class="text-slate-500 mt-2">
-          Do you really want to delete these records? <br />This process cannot
-          be undone.
-        </div>
-      </div>
-      <div class="px-5 pb-8 text-center">
-        <button
-          type="button"
-          @click="deleteConfirmationModal = false"
-          class="btn btn-outline-secondary w-24 mr-1"
-        >
-          Cancel
-        </button>
-        <button type="button" class="btn btn-danger w-24">Delete</button>
-      </div>
-    </ModalBody>
-  </Modal>
-  <!-- END: Delete Confirmation Modal -->
+
 </template>
 
 <script setup>
 import { ref } from "vue";
-import router from "@/router";
 import PaginationComponent from "@/components/table/Pagination.vue";
-const items = ref([]);
+import posts from '@/dummy-data/posts.json'
 
+const items = ref(posts);
 
-
-const edit = (id) => {
-  router.push({ name: "post-edit", params: { id: id } });
-};
-
-
-const deleteFunc = async (id) => {
- 
-};
-
-const updatePagination = async (newData) => {
-  items.value = newData;
-};
 </script>
