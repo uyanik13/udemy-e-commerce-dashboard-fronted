@@ -112,7 +112,7 @@ onBeforeMount(async () => {
 
 const getItems = () => {
   PostAPI.index().then(res=>{
-    items.value = res.data
+    items.value = res
   })
  
 };

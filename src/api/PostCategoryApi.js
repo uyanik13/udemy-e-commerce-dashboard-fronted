@@ -5,9 +5,9 @@ import {
     _delete
 } from '@/api/BaseApi'
 
-const MODULE_NAME = 'post'
+const MODULE_NAME = 'post-category'
 
-export default class Post {
+export default class PostCategoryApi {
 
     static async index(data) {
         return get(MODULE_NAME)

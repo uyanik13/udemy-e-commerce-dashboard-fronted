@@ -75,7 +75,7 @@
                 v-model="form.post_category_id"
                 :reduce="(option) => option.id"
                 :multiple="false"
-                :options="categories"
+                :options="postCategories"
               />
               
             </div>
@@ -192,7 +192,7 @@
             v-model="form.categories"
             :reduce="(option) => option.id"
             :multiple="true"
-            :options="categories"
+            :options="postCategories"
           />
         </div>
 
@@ -205,7 +205,7 @@
             :reduce="(option) => option.id"
             :multiple="true"
             taggable
-            :options="tags"
+            :options="postTags"
           />
         </div>
         <div class="form-check form-switch flex flex-col items-start mt-3">
@@ -266,7 +266,9 @@ import { toRefs, ref, onBeforeMount } from "vue";
 import vSelect from "vue-select";
 import "vue-select/dist/vue-select.css";
 import router from '@/router';
-
+import PostAPI from '@/api/PostApi'
+import PostCategoryAPI from '@/api/PostCategoryApi'
+import PostTagAPI from '@/api/PostTagApi'
 
 const categories = ref([]);
 const tags = ref([]);
@@ -288,5 +290,32 @@ const form = ref({
 const gptQuestion = ref("");
 const gptResponse = ref(null);
 const gptSelectedInput = ref(null);
+
+const postCategories = ref([])
+const postTags = ref([])
+
+const save = () => {
+  PostAPI.store(form.value).then(res => {
+    console.log(res)
+  })
+}
+
+onBeforeMount(async () => {
+  getCategories();
+  getTags();
+});
+
+const getCategories = () => {
+  PostCategoryAPI.index().then(res=>{
+    postCategories.value = res.data
+  })
+ 
+};
+const getTags = () => {
+  PostTagAPI.index().then(res=>{
+    postTags.value = res.data
+  })
+ 
+};
 
 </script>
