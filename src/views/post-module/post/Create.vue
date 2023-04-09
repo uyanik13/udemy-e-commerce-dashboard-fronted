@@ -272,6 +272,7 @@ import router from "@/router";
 import PostAPI from "@/api/PostApi";
 import PostCategoryAPI from "@/api/PostCategoryApi";
 import PostTagAPI from "@/api/PostTagApi";
+import { helper as $h } from "@/utils/helper";
 
 const categories = ref([]);
 const tags = ref([]);
@@ -300,36 +301,10 @@ const postCategories = ref([]);
 const postTags = ref([]);
 
 const save = () => {
-
-  const formData = transformData();
+  const formData = $h.transformData(form.value);
   PostAPI.store(formData).then((res) => {
     console.log(res);
   });
-};
-
-const appendToFormData = (formData, key, value) => {
-  if (value instanceof File) {
-    formData.append(key, value, value.name);
-  } else if (Array.isArray(value)) {
-    value.forEach((item) => {
-      appendToFormData(formData, `${key}[]`, item);
-    });
-  } else if (typeof value === 'object' && value !== null) {
-    Object.entries(value).forEach(([subKey, subValue]) => {
-      appendToFormData(formData, `${key}[${subKey}]`, subValue);
-    });
-  } else {
-    formData.append(key, value);
-  }
-};
-
-const transformData = () => {
-  const formData = new FormData();
-  Object.entries(form.value).forEach(([key, value]) => {
-    appendToFormData(formData, key, value);
-  });
-
-  return formData;
 };
 
 onBeforeMount(async () => {

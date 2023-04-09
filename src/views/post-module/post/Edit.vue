@@ -217,6 +217,8 @@
             class="form-check-input"
             type="checkbox"
             v-model="form.status"
+            true-value="1"
+            false-value="0"
           />
         </div>
       </div>
@@ -270,6 +272,7 @@ import PostAPI from '@/api/PostApi'
 import PostCategoryAPI from '@/api/PostCategoryApi'
 import PostTagAPI from '@/api/PostTagApi'
 import {useRoute} from 'vue-router'
+import { helper as $h } from "@/utils/helper";
 const route = useRoute()
 
 const categories = ref([]);
@@ -278,7 +281,7 @@ const gptAuthToken = import.meta.env.VITE_GPT_AUTH_TOKEN;
 const form = ref({
   title: "",
   content: "",
-  status: true,
+  status: 1,
   thumbnail: null,
   thumbnail_alt_text: null,
   tags: [],
@@ -297,7 +300,8 @@ const postCategories = ref([])
 const postTags = ref([])
 
 const save = () => {
-  PostAPI.update(form.value, form.value.id).then(res => {
+  const formData = $h.transformData(form.value, 'PATCH');
+  PostAPI.update(formData, form.value.id).then(res => {
     form.value = res
   })
 }
