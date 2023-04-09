@@ -22,7 +22,7 @@ export default class Post {
     }
 
     static async update(data, id) {
-        return patch(`${MODULE_NAME}/${id}`, data)
+        return post(`${MODULE_NAME}/${id}`, data)
     }
 
     static async delete(id) {

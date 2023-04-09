@@ -139,6 +139,31 @@ const helpers = {
     }
     return tempColors;
   },
+  appendToFormData (formData, key, value) {
+    if (value instanceof File) {
+      formData.append(key, value, value.name);
+    } else if (Array.isArray(value)) {
+      value.forEach((item) => {
+        this.appendToFormData(formData, `${key}[]`, item);
+      });
+    } else if (typeof value === 'object' && value !== null) {
+      Object.entries(value).forEach(([subKey, subValue]) => {
+        this.appendToFormData(formData, `${key}[${subKey}]`, subValue);
+      });
+    } else {
+      formData.append(key, value);
+    }
+  },
+  transformData(form, method = 'POST'){
+    const formData = new FormData();
+    Object.entries(form).forEach(([key, value]) => {
+      this.appendToFormData(formData, key, value);
+    });
+    if(method == 'PATCH' || method == 'PUT'){
+      formData.append('_method', 'PATCH')
+    }
+    return formData;
+  },
   showSuccess(title) {
     Notiflix.Notify.success(title, {
       timeout:1000
