@@ -5,9 +5,9 @@ import {
     _delete
 } from '@/api/BaseApi'
 
-const MODULE_NAME = 'post-tag'
+const MODULE_NAME = 'product-variant'
 
-export default class PostTagApi {
+export default class ProductVariantApi {
 
     static async index(id) {
         return get(MODULE_NAME)
