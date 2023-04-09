@@ -62,11 +62,11 @@
               {{ item.id }}
             </td>
             <td class="w-40">
-              <span v-if="item.images.length && item.images[0]">
+              <span v-if="item.images && item.images.length && item.images[0]">
                 <img class="w-8 h-8" :src="item.images[0].image_url" />
               </span>
             </td>
-            <td class="w-40">{{ item.name.substring(0, 20) }}...</td>
+            <td class="w-40">{{ item.name ? item.name.substring(0, 20): null }}...</td>
             <td>
               {{ item.price }}
             </td>
@@ -149,16 +149,23 @@
 import { ref, onBeforeMount } from "vue";
 import router from "@/router";
 import PaginationComponent from "@/components/table/Pagination.vue";
+import ProductAPI from '@/api/ProductApi'
+
 const items = ref([]);
 
 
+onBeforeMount(() =>{
+  getItems()
+});
 
 const edit = (id) => {
   router.push({ name: "product-edit", params: { id: id } });
 };
 
 const getItems = async () => {
- 
+  ProductAPI.index().then(res => {
+    items.value = res
+  })
 };
 
 const deleteFunc = async (id) => {

@@ -768,6 +768,11 @@
 import { ref, onBeforeMount } from "vue";
 import vSelect from "vue-select";
 import "vue-select/dist/vue-select.css";
+import ProductAPI from '@/api/ProductApi'
+import ProductCategoryAPI from '@/api/ProductCategoryApi'
+import ProductVariantAPI from '@/api/ProductVariantApi'
+import DiscountAPI from '@/api/DiscountApi'
+import ShippingAPI from '@/api/ShippingApi'
 
 const form = ref({
   images: [],
@@ -803,25 +808,61 @@ const product_categories = ref([]);
 const discounts = ref([]);
 
 const save = async () => {
- 
+    const formData = transformData()
+    await ProductAPI.store(formData, {
+      "Content-Type" : "multipart/form-data"
+    }).then(res => {
+      console.log(res)
+    })
 };
 
-//Get Variants From API
+const transformData = ()=> {
+  const formData = new FormData();
+  Object.keys(form.value).forEach((key) => {
+    if (key === "images") {
+      form.value.images.forEach((item) => {
+        if (item.file instanceof File) {
+          formData.append(`images[]`, item.file);
+        }
+        delete item.image;
+      });
+    } else if (key === "product_variants") {
+      formData.append(key, JSON.stringify(form.value[key]));
+    } else if (key === "size") {
+      Object.keys(form.value.size).forEach((sizeKey) => {
+        formData.append(`size[${sizeKey}]`, form.value.size[sizeKey]);
+      });
+    } else {
+      formData.append(key, form.value[key]);
+    }
+  });
+  return formData;
+}
+
+///Get Variants From API
 const getVariants = () => {
-  
+  const res = ProductVariantAPI.index().then(
+    (response) => (product_variants.value = response)
+  );
 };
 
 const getDiscounts = () => {
-  
+  const res = DiscountAPI.index().then(
+    (response) => (discounts.value = response.data)
+  );
 };
 
 //Get Product Categories From API
-const getProductCategories = () => {
- 
+const getShippings = () => {
+  const res = ShippingAPI.index().then(
+    (response) => (shippings.value = response.data)
+  );
 };
 
-const getShippings = () => {
- 
+const getProductCategories = () => {
+  const res = ProductCategoryAPI.index().then(
+    (response) => (product_categories.value = response.data)
+  );
 };
 
 const addNewOption = () => {
@@ -832,12 +873,28 @@ const removeOption = (index) => {
 };
 
 const uploadImage = (input) => {
-  
+  if (input.target.files && input.target.files[0]) {
+    const reader = new FileReader();
+    reader.onload = (e) => {
+      const image = e.target.result;
+      form.value.images.push({
+        file: input.target.files[0],
+        image_url: image,
+      });
+    };
+    reader.readAsDataURL(input.target.files[0]);
+  }
 };
 
 const removeImage = (index) => {
   form.value.images.splice(index, 1);
 };
 
+onBeforeMount(async () => {
+  getVariants();
+  getProductCategories();
+  getShippings();
+  getDiscounts();
+});
 
 </script>
