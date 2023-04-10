@@ -21,8 +21,8 @@ export default class ProductApi {
         return post(MODULE_NAME, data)
     }
 
-    static async update(data, id) {
-        return post(`${MODULE_NAME}/${id}`, data)
+    static async update(data, id, headers = {}) {
+        return post(`${MODULE_NAME}/${id}`, data, headers)
     }
 
     static async delete(id) {

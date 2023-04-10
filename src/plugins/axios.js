@@ -6,7 +6,7 @@ import {
 
 const axios = axiosOriginal.create({
   baseURL: 'http://127.0.0.1:8000/api/auth/',
-  timeout: 2000,
+  timeout: 5000,
   headers: {
     "Accept": 'application/json',
     'Content-Type': 'application/json',
