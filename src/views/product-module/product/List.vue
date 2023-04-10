@@ -168,9 +168,10 @@ const getItems = async () => {
   })
 };
 
-const deleteFunc = async (id) => {
- 
-};
+const deleteFunc = (id) => {
+  ProductAPI.delete(id).then(res => {console.log(res)})
+}
+
 
 const updatePagination = async (newData) => {
   items.value = newData;
