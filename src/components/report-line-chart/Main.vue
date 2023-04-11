@@ -23,6 +23,10 @@ const props = defineProps({
     type: [Number, String],
     default: "auto",
   },
+  sales: {
+    type: Array,
+    default: "auto",
+  }
 });
 
 const darkMode = computed(() => useDarkModeStore().darkMode);
@@ -30,38 +34,13 @@ const colorScheme = computed(() => useColorSchemeStore().colorScheme);
 
 const data = computed(() => {
   return {
-    labels: [
-      "Jan",
-      "Feb",
-      "Mar",
-      "Apr",
-      "May",
-      "Jun",
-      "Jul",
-      "Aug",
-      "Sep",
-      "Oct",
-      "Nov",
-      "Dec",
-    ],
+    labels: props.sales.map(sale => sale.month),
     datasets: [
       {
-        label: "# of Votes",
-        data: [0, 200, 250, 200, 700, 550, 650, 1050, 950, 1100, 900, 1200],
+        label: "Sales",
+        data: props.sales.map(sale => sale.total_sales),
         borderWidth: 2,
         borderColor: colorScheme.value ? colors.primary(0.8) : "",
-        backgroundColor: "transparent",
-        pointBorderColor: "transparent",
-        tension: 0.4,
-      },
-      {
-        label: "# of Votes",
-        data: [0, 300, 400, 560, 320, 600, 720, 850, 690, 805, 1200, 1010],
-        borderWidth: 2,
-        borderDash: [2, 2],
-        borderColor: darkMode.value
-          ? colors.slate["400"](0.6)
-          : colors.slate["400"](),
         backgroundColor: "transparent",
         pointBorderColor: "transparent",
         tension: 0.4,

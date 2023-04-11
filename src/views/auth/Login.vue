@@ -7,7 +7,7 @@
         <div class="hidden xl:flex flex-col min-h-screen">
           <a href="" class="-intro-x flex items-center pt-5">
             <img
-              alt="E-commerce Tailwind HTML Admin Template"
+              alt="Midone Tailwind HTML Admin Template"
               class="w-6"
               src="@/assets/images/logo.svg"
             />
@@ -15,7 +15,7 @@
           </a>
           <div class="my-auto">
             <img
-              alt="E-commerce Tailwind HTML Admin Template"
+              alt="Midone Tailwind HTML Admin Template"
               class="-intro-x w-1/2 -mt-16"
               src="@/assets/images/illustration.svg"
             />
@@ -116,18 +116,20 @@
 import { ref, onMounted } from "vue";
 import DarkModeSwitcher from "@/components/dark-mode-switcher/Main.vue";
 import dom from "@left4code/tw-starter/dist/js/dom";
-import {useAuthStore} from '@/stores/auth.store'
-const authStore = useAuthStore()
+import { useAuthStore } from '@/stores';
+
+const authStore = useAuthStore();
 
 const form = ref({
-  email : 'ogur.uyanik@gmail.com',
-  password : 123456,
-  remember_me : null,
+      email: 'ogur.uyanik@gmail.com',
+      password: '123456',
+      remember_me: false
 })
 
-const login = ()=> {
-   authStore.login(form.value)
-}
+const login = async () => {
+    return await authStore.login(form.value);
+};
+
 
 onMounted(() => {
   dom("body").removeClass("main").removeClass("error-page").addClass("login");

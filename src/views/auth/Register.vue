@@ -135,7 +135,7 @@
 import { ref, onMounted } from "vue";
 import DarkModeSwitcher from "@/components/dark-mode-switcher/Main.vue";
 import dom from "@left4code/tw-starter/dist/js/dom";
-import {useAuthStore} from '@/stores/auth.store'
+import {useAuthStore} from '@/stores'
 const authStore = useAuthStore()
 
 const form = ref({

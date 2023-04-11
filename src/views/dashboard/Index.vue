@@ -27,7 +27,7 @@
                       </Tippy>
                     </div>
                   </div>
-                  <div class="text-3xl font-medium leading-8 mt-6">4.710</div>
+                  <div v-if="dashboardData.monthlySales" class="text-3xl font-medium leading-8 mt-6">{{ dashboardData.monthlySales.total_sales }}</div>
                   <div class="text-base text-slate-500 mt-1">Item Sales</div>
                 </div>
               </div>
@@ -48,7 +48,7 @@
                       </Tippy>
                     </div>
                   </div>
-                  <div class="text-3xl font-medium leading-8 mt-6">3.721</div>
+                  <div v-if="dashboardData.monthlyOrders" class="text-3xl font-medium leading-8 mt-6">{{ dashboardData.monthlyOrders.total_orders }}</div>
                   <div class="text-base text-slate-500 mt-1">New Orders</div>
                 </div>
               </div>
@@ -68,7 +68,7 @@
                       </Tippy>
                     </div>
                   </div>
-                  <div class="text-3xl font-medium leading-8 mt-6">2.149</div>
+                  <div v-if="dashboardData.totalProducts" class="text-3xl font-medium leading-8 mt-6">{{ dashboardData.totalProducts }}</div>
                   <div class="text-base text-slate-500 mt-1">
                     Total Products
                   </div>
@@ -90,7 +90,7 @@
                       </Tippy>
                     </div>
                   </div>
-                  <div class="text-3xl font-medium leading-8 mt-6">152.040</div>
+                  <div v-if="dashboardData.totalCustomers" class="text-3xl font-medium leading-8 mt-6">{{ dashboardData.totalCustomers }}</div>
                   <div class="text-base text-slate-500 mt-1">
                     Unique Visitor
                   </div>
@@ -117,7 +117,7 @@
                   numberOfMonths: 2,
                   showWeekNumbers: true,
                   dropdowns: {
-                    minYear: 1990,
+                    minYear: 2020,
                     maxYear: null,
                     months: true,
                     years: true,
@@ -131,10 +131,10 @@
             <div class="flex flex-col md:flex-row md:items-center">
               <div class="flex">
                 <div>
-                  <div
+                  <div v-if="dashboardData.chart_data"
                     class="text-primary dark:text-slate-300 text-lg xl:text-xl font-medium"
                   >
-                    $15,000
+                   {{ helper.filterPrice(dashboardData.chart_data.currentMonthTotal)}}
                   </div>
                   <div class="mt-0.5 text-slate-500">This Month</div>
                 </div>
@@ -142,8 +142,8 @@
                   class="w-px h-12 border border-r border-dashed border-slate-200 dark:border-darkmode-300 mx-4 xl:mx-5"
                 ></div>
                 <div>
-                  <div class="text-slate-500 text-lg xl:text-xl font-medium">
-                    $10,000
+                  <div v-if="dashboardData.chart_data" class="text-slate-500 text-lg xl:text-xl font-medium">
+                    {{ helper.filterPrice(dashboardData.chart_data.lastMonthTotal)}}
                   </div>
                   <div class="mt-0.5 text-slate-500">Last Month</div>
                 </div>
@@ -164,8 +164,14 @@
                 </DropdownMenu>
               </Dropdown>
             </div>
-            <div class="report-chart">
-              <ReportLineChart :height="275" class="mt-6 -mb-6" />
+            <div class="report-chart" v-if="dashboardData.chart_data">
+              <ReportLineChart
+                :sales="dashboardData.chart_data.sales"
+                :newOrders="dashboardData.chart_data.newOrders"
+                :totalProducts="dashboardData.chart_data.totalProducts"
+                :height="275"
+                class="mt-6 -mb-6"
+              />
             </div>
           </div>
         </div>
@@ -272,7 +278,7 @@
                   class="w-10 h-10 flex-none image-fit rounded-md overflow-hidden"
                 >
                   <img
-                    alt="E-commerce Tailwind HTML Admin Template"
+                    alt="Midone Tailwind HTML Admin Template"
                     :src="faker.photos[0]"
                   />
                 </div>
@@ -414,7 +420,7 @@
                       <div class="w-10 h-10 image-fit zoom-in">
                         <Tippy
                           tag="img"
-                          alt="E-commerce Tailwind HTML Admin Template"
+                          alt="Midone Tailwind HTML Admin Template"
                           class="rounded-full"
                           :src="faker.images[0]"
                           :content="`Uploaded at ${faker.dates[0]}`"
@@ -423,7 +429,7 @@
                       <div class="w-10 h-10 image-fit zoom-in -ml-5">
                         <Tippy
                           tag="img"
-                          alt="E-commerce Tailwind HTML Admin Template"
+                          alt="Midone Tailwind HTML Admin Template"
                           class="rounded-full"
                           :src="faker.images[1]"
                           :content="`Uploaded at ${faker.dates[1]}`"
@@ -432,7 +438,7 @@
                       <div class="w-10 h-10 image-fit zoom-in -ml-5">
                         <Tippy
                           tag="img"
-                          alt="E-commerce Tailwind HTML Admin Template"
+                          alt="Midone Tailwind HTML Admin Template"
                           class="rounded-full"
                           :src="faker.images[2]"
                           :content="`Uploaded at ${faker.dates[2]}`"
@@ -552,7 +558,7 @@
                     class="w-10 h-10 flex-none image-fit rounded-full overflow-hidden"
                   >
                     <img
-                      alt="E-commerce Tailwind HTML Admin Template"
+                      alt="Midone Tailwind HTML Admin Template"
                       :src="faker.photos[0]"
                     />
                   </div>
@@ -603,7 +609,7 @@
                     class="w-10 h-10 flex-none image-fit rounded-full overflow-hidden"
                   >
                     <img
-                      alt="E-commerce Tailwind HTML Admin Template"
+                      alt="Midone Tailwind HTML Admin Template"
                       :src="$f()[9].photos[0]"
                     />
                   </div>
@@ -626,7 +632,7 @@
                     class="w-10 h-10 flex-none image-fit rounded-full overflow-hidden"
                   >
                     <img
-                      alt="E-commerce Tailwind HTML Admin Template"
+                      alt="Midone Tailwind HTML Admin Template"
                       :src="$f()[8].photos[0]"
                     />
                   </div>
@@ -647,7 +653,7 @@
                         :content="$f()[0].products[0].name"
                       >
                         <img
-                          alt="E-commerce Tailwind HTML Admin Template"
+                          alt="Midone Tailwind HTML Admin Template"
                           class="rounded-md border border-white"
                           :src="$f()[8].images[0]"
                         />
@@ -658,7 +664,7 @@
                         :content="$f()[1].products[0].name"
                       >
                         <img
-                          alt="E-commerce Tailwind HTML Admin Template"
+                          alt="Midone Tailwind HTML Admin Template"
                           class="rounded-md border border-white"
                           :src="$f()[8].images[1]"
                         />
@@ -669,7 +675,7 @@
                         :content="$f()[2].products[0].name"
                       >
                         <img
-                          alt="E-commerce Tailwind HTML Admin Template"
+                          alt="Midone Tailwind HTML Admin Template"
                           class="rounded-md border border-white"
                           :src="$f()[8].images[2]"
                         />
@@ -689,7 +695,7 @@
                     class="w-10 h-10 flex-none image-fit rounded-full overflow-hidden"
                   >
                     <img
-                      alt="E-commerce Tailwind HTML Admin Template"
+                      alt="Midone Tailwind HTML Admin Template"
                       :src="$f()[7].photos[0]"
                     />
                   </div>
@@ -718,7 +724,7 @@
                     class="w-10 h-10 flex-none image-fit rounded-full overflow-hidden"
                   >
                     <img
-                      alt="E-commerce Tailwind HTML Admin Template"
+                      alt="Midone Tailwind HTML Admin Template"
                       :src="$f()[6].photos[0]"
                     />
                   </div>
@@ -956,16 +962,19 @@
 </template>
 
 <script setup>
-import { ref, provide } from "vue";
+import { ref, provide, onBeforeMount } from "vue";
 import ReportLineChart from "@/components/report-line-chart/Main.vue";
 import ReportDonutChart from "@/components/report-donut-chart/Main.vue";
 import ReportPieChart from "@/components/report-pie-chart/Main.vue";
 import ReportMap from "@/components/report-map/Main.vue";
 import ReportDonutChart1 from "@/components/report-donut-chart-1/Main.vue";
 import SimpleLineChart1 from "@/components/simple-line-chart-1/Main.vue";
+import DashboardAPI from "@/api/DashboardApi";
+import { helper } from "@/utils/helper";
 
 const salesReportFilter = ref();
 const importantNotesRef = ref();
+const dashboardData = ref({});
 
 provide("bind[importantNotesRef]", (el) => {
   importantNotesRef.value = el;
@@ -980,4 +989,16 @@ const nextImportantNotes = () => {
   const el = importantNotesRef.value;
   el.tns.goTo("next");
 };
+
+const getDashboardData = async () => {
+  await DashboardAPI.index().then(res => {
+    dashboardData.value = res;
+  });
+  
+}
+
+onBeforeMount(async () => {
+  getDashboardData();
+});
+
 </script>
