@@ -189,7 +189,7 @@
               <UserIcon class="w-4 h-4 mr-2" /> Profile</DropdownItem
             >
             <DropdownDivider class="border-white/[0.08]" />
-            <DropdownItem class="dropdown-item hover:bg-white/5">
+            <DropdownItem @click="logout" class="dropdown-item hover:bg-white/5">
               <ToggleRightIcon class="w-4 h-4 mr-2" /> Logout</DropdownItem
             >
           </DropdownContent>
@@ -203,7 +203,9 @@
 
 <script setup>
 import { ref } from "vue";
+import { useAuthStore} from '@/stores'
 
+const authStore = useAuthStore()
 const searchDropdown = ref(false);
 const showSearchDropdown = () => {
   searchDropdown.value = true;
@@ -211,4 +213,8 @@ const showSearchDropdown = () => {
 const hideSearchDropdown = () => {
   searchDropdown.value = false;
 };
+
+const logout =() => {
+  authStore.logout()
+}
 </script>

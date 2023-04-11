@@ -1,4 +1,5 @@
 import { createRouter, createWebHistory } from "vue-router";
+import {useAuthStore} from '@/stores'
 
 const routes = [
   {
@@ -219,6 +220,25 @@ export const router = createRouter({
   },
 });
 
+router.beforeEach(async (to) => {
+  const authStore = useAuthStore();
+  const publicPages = ['/login', '/register'];
+  const authRequired = !publicPages.includes(to.path);
+
+  if(to.path == '/'){
+    return { path: authStore.returnUrl };
+  }
+
+  if (authRequired && !authStore.user) {
+    authStore.returnUrl = to.fullPath;
+      return { path: '/login' };
+  }
+
+  if(!authRequired && authStore.user){
+      return { path: authStore.returnUrl };
+  }
+
+})
 
 
 export default router;

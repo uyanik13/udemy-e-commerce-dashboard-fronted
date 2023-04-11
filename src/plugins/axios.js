@@ -1,7 +1,8 @@
 import axiosOriginal from 'axios';
+import {helper} from '@/utils/helper'
 import {
   useAuthStore
-} from '@/stores/auth.store'
+} from '@/stores'
 
 
 const axios = axiosOriginal.create({
@@ -21,6 +22,19 @@ axios.interceptors.request.use((config) => {
   }
   return config;
 });
+
+axios.interceptors.response.use(
+  (response) =>{
+    if(response.data && response.data.message){
+      helper.showSuccess(response.data.message)
+    }
+    return response
+  },
+  (error) => {
+    helper.showError(error)
+    return Promise.reject(error)
+  }
+);
 
 
 export default axios;
