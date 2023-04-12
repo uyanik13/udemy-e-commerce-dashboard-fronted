@@ -806,6 +806,7 @@ const form = ref({
 });
 
 const deletedImages = ref([])
+const deletedVariants = ref([])
 const product_variants = ref([]);
 const shippings = ref([]);
 const product_categories = ref([]);
@@ -842,6 +843,7 @@ const transformData = () => {
   });
   formData.append('_method', 'PATCH')
   formData.append('deleted_images', JSON.stringify(deletedImages.value))
+  formData.append('deleted_variants', JSON.stringify(deletedVariants.value))
   return formData;
 };
 
@@ -875,7 +877,11 @@ const addNewOption = () => {
   form.value.product_variants.push({});
 };
 const removeOption = (index) => {
+  if(form.value.product_variants[index].id){
+    deletedVariants.value.push(form.value.product_variants[index])
+  }
   form.value.product_variants.splice(index, 1);
+ 
 };
 
 const uploadImage = (input) => {
